@@ -12,7 +12,7 @@ public class ConexionMySQL {
         //Conexión a localhost
         String url = "jdbc:mysql://localhost/tienda?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         String user = "root";
-        String pass = "Avila-23";
+        String pass = "Avila";
 
         System.setProperty(driver,"");
         try{
