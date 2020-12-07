@@ -2,10 +2,7 @@ package modelo;
 
 import servicio.general.AES;
 import servicio.general.ConexionMySQL;
-import servicio.general.Validacion;
-import view.Menu;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,9 +10,8 @@ import java.sql.SQLException;
 public class AdministradorDao extends ConexionMySQL {
     private PreparedStatement pstm;
     private ResultSet rs;
-    Validacion val = new Validacion();
-    AES aes= new AES();
-    private final String SQL_CONSULTAR_USUARIO = "SELECT * FROM usuario = ? AND "+aes.decrypt("password")+"=?;";
+    AES aes = new AES();
+    private final String SQL_CONSULTAR_USUARIO = "SELECT * FROM administrador WHERE usuario = ? AND " + aes.decrypt("password") + "=?";
 
     public boolean login(AdministradorBean bean) throws SQLException {
         boolean resultado = false;

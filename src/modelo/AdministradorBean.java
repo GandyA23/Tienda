@@ -4,6 +4,11 @@ public class AdministradorBean {
     private String usuario;
     private String contra;
 
+    public AdministradorBean(String usuario, String contra) {
+        this.usuario = usuario;
+        this.contra = contra;
+    }
+
     public String getUsuario() {
         return usuario;
     }
