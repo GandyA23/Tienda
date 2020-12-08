@@ -15,7 +15,8 @@ public class CategoriaDao extends ConexionMySQL {
     private final String SQL_MODIFICAR_CATEGORIA = "UPDATE categoria SET nombre = ?, descripcion = ? WHERE id= ?";
     private final String SQL_ELIMINAR_CATEGORIA = "DELETE FROM categoria WHERE id = ?";
     private final String SQL_CONSULTAR_CATEGORIA = "SELECT * FROM categoria ORDER BY nombre";
-    private final String SQL_CANTIDAD_CATEGORIA = "SLECT count(nombre) as cantidad FROM categoria";
+    private final String SQL_CONSULTAR_CATEGORIA_UNO = "SELECT * FROM categoria WHERE nombre = ? ";
+    private final String SQL_CANTIDAD_CATEGORIA = "SELECT count(nombre) as cantidad FROM categoria";
     public boolean add(CategoriaBean bean)  {
         boolean resultado = false;
 
@@ -89,6 +90,34 @@ public class CategoriaDao extends ConexionMySQL {
         return resultado;
     }
 
+    public CategoriaBean queryOne(String nombre){
+        CategoriaBean bean = null ;
+
+        try{
+            ps = getConexion().prepareStatement(SQL_CONSULTAR_CATEGORIA_UNO);
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+
+            if(rs.next())
+                bean = new CategoriaBean( rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion") );
+
+        }catch (SQLException e) {
+            System.out.println("Error al consultar si la categoría existe :(");
+            System.out.println(e);
+        }finally {
+            try{
+                rs.close();
+                ps.close();
+            }catch (Exception e){
+                System.out.println("Error al cerrar las conexiones :(");
+                System.out.println(e);
+
+            }
+        }
+
+        return bean ;
+    }
+
     public CategoriaBean [] query(){
         CategoriaBean[] categoria = null;
 
@@ -121,6 +150,7 @@ public class CategoriaDao extends ConexionMySQL {
                 System.out.println(e);
             }finally {
                 try{
+                    rs.close();
                     ps.close();
                 }catch (Exception e){
                     System.out.println("Error al cerrar las conexiones :(");

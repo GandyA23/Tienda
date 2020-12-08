@@ -6,7 +6,11 @@ public class CategoriaBean {
     private String descripcion;
 
     public CategoriaBean() {
+    }
 
+    public CategoriaBean(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 
     public CategoriaBean(int id, String nombre, String descripcion) {
