@@ -18,10 +18,10 @@ public class Cin {
     }
 
     public String cString(){
-        return cin.next();
+        return cin.next().trim();
     }
 
     public String cLine(){
-        return cin.nextLine();
+        return cin.nextLine().trim();
     }
 }
