@@ -10,6 +10,7 @@ public class Cin {
     }
 
     public int cInt(String mensaje){
+        init();
         int aux = 0 ;
         boolean c = true ;
 
@@ -29,6 +30,7 @@ public class Cin {
     }
 
     public double cDouble(String mensaje){
+        init();
         double aux = 0 ;
         boolean c = true ;
 
@@ -48,10 +50,12 @@ public class Cin {
     }
 
     public String cString(){
+        init();
         return cin.next().trim();
     }
 
     public String cLine(){
+        init();
         return cin.nextLine().trim();
     }
 }
