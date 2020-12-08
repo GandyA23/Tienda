@@ -102,11 +102,10 @@ public class Categoria {
 
         do{
             System.out.print("Ingrese el nombre de la categoría: ");
-            cin.cLine();
             nombre = cin.cLine();
 
             if( c = !validacion.onlyLetters(nombre) )
-                System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo");
+                System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo\n");
 
         }while (c);
 
@@ -120,7 +119,7 @@ public class Categoria {
                 descripcion = cin.cLine();
 
                 if( c = validacion.haveCharNotAllowed(descripcion) )
-                    System.out.println("Error: Hay caracteres no permitidos, intentelo de nuevo");
+                    System.out.println("Error: Hay caracteres no permitidos, intentelo de nuevo\n");
 
             }while (c);
 
@@ -133,7 +132,7 @@ public class Categoria {
         return flag;
     }
 
-    private int query(){
+    protected int query(){
         System.out.println("Consultar Categorías");
         CategoriaBean[] categoriaBeans = categoriaDao.query();
 
@@ -142,8 +141,8 @@ public class Categoria {
         int n = categoriaBeans.length;
         if( n == 0 ) return 2 ;
 
-        for(int i=0; i<n; i++)
-            System.out.println("#" + (i+1) + " -- Nombre: " + categoriaBeans[i].getNombre() + " -- Descripción: " + validacion.nullMessage( categoriaBeans[i].getDescripcion() ));
+        for (CategoriaBean c: categoriaBeans)
+            System.out.println("Id: " + c.getId() + " -- Nombre: " + c.getNombre() + " -- Descripción: " + validacion.nullMessage( c.getDescripcion() ));
 
         return 1 ;
     }
@@ -156,11 +155,10 @@ public class Categoria {
 
         do{
             System.out.print("Ingrese el nombre de la Categoría que desea eliminar: ");
-            cin.cLine();
             nombre = cin.cLine();
 
             if( c = !validacion.onlyLetters(nombre) )
-                System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo");
+                System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo\n");
 
         }while (c);
 
@@ -176,7 +174,6 @@ public class Categoria {
                     "2.- No\n" +
                     "Ingrese una opción [1/2]: "
             );
-
 
             if( c = opc < 1 || opc > 2 )
                 System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
@@ -200,7 +197,6 @@ public class Categoria {
         System.out.println("Actualizar Categoría");
 
         System.out.print("Ingrese el nombre de la Categoría que desea actualizar: ");
-        cin.cLine();
         nombre = cin.cLine();
 
         categoriaBean = categoriaDao.queryOne(nombre);
@@ -221,11 +217,10 @@ public class Categoria {
                 case 1:
                     do{
                         System.out.print("Ingrese el nombre de la categoría: ");
-                        cin.cLine();
                         nombre = cin.cLine();
 
                         if( c = !validacion.onlyLetters(nombre) )
-                            System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo");
+                            System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo\n");
 
                     }while (c);
 
@@ -235,11 +230,10 @@ public class Categoria {
                 case 2:
                     do{
                         System.out.print("Ingrese la descripción de la categoría: ");
-                        cin.cLine();
                         descripcion = cin.cLine();
 
                         if( c = validacion.haveCharNotAllowed(descripcion) )
-                            System.out.println("Error: Hay caracteres no permitidos, intentelo de nuevo");
+                            System.out.println("Error: Hay caracteres no permitidos, intentelo de nuevo\n");
 
                     }while (c);
 
@@ -247,8 +241,8 @@ public class Categoria {
                     break;
 
                 case 3:
-                    categoriaDao.update(categoriaBean);
-                    return 1 ;
+                    if( categoriaDao.update(categoriaBean) ) return 1 ;
+                    else return 0 ;
 
                 case 4:
                     return 0 ;

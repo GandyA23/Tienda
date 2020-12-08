@@ -5,12 +5,14 @@ import servicio.general.ConexionMySQL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ProductoDao extends ConexionMySQL {
 
     private final String SQL_COUNT = "SELECT count(codigo) AS cantidad FROM producto";
     private final String SQL_ADD = "INSERT INTO producto VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String SQL_QUERY = "SELECT * FROM producto ORDER BY nombre" ;
+    private final String SQL_QUERY_ONE = "SELECT * FROM producto WHERE codigo = ?" ;
     private final String SQL_DELETE = "DELETE FROM producto WHERE codigo = ? ";
     private final String SQL_UPDATE = "UPDATE producto SET `nombre` = ?, `idCategoria` = ?, `idMarca` = ?, `existencia` = ?, `precio` = ?, `descripcion` = ? WHERE codigo = ? ";
 
@@ -88,11 +90,47 @@ public class ProductoDao extends ConexionMySQL {
             rs.close();
             pstm.close();
         }catch (Exception e){
-            System.out.println("Error al cerrar cerrar conexiones en ProductoDao().add(ProductoBean bean)");
+            System.out.println("Error al cerrar conexiones en ProductoDao().add(ProductoBean bean)");
             System.out.println(e);
         }
 
         return productos;
+    }
+
+    public ProductoBean queryOne(String codigo){
+        ProductoBean bean = null ;
+
+        try{
+            pstm = getConexion().prepareStatement(SQL_QUERY_ONE);
+            pstm.setString(1, codigo);
+            rs = pstm.executeQuery();
+
+            if(rs.next())
+                bean = new ProductoBean(
+                        rs.getString("codigo"),
+                        rs.getString("nombre"),
+                        new CategoriaBean( rs.getInt("idCategoria") ),
+                        new MarcaBean( rs.getInt("idMarca") ),
+                        rs.getInt("existencia"),
+                        rs.getDouble("precio"),
+                        rs.getString("descripcion")
+                );
+
+        }catch (SQLException e) {
+            System.out.println("Error en ProductoDao().query(String codigo)");
+            System.out.println(e);
+        }finally {
+            try{
+                rs.close();
+                pstm.close();
+            }catch (Exception e){
+                System.out.println("Error al cerrar conexiones de DB en ProductoDao().query(String codigo)");
+                System.out.println(e);
+
+            }
+        }
+
+        return bean ;
     }
 
     public boolean delete(String codigo){

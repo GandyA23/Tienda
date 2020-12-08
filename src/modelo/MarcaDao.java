@@ -15,7 +15,8 @@ public class MarcaDao extends ConexionMySQL{
     private final  String SQL_MODIFICAR_MARCA = "UPDATE marca SET nombre = ?, descripcion = ? WHERE id = ?;";
     private  final  String SQL_ELIMINAR_MARCA = "DELETE FROM marca WHERE id = ?;";
     private final String SQL_CONSULTAR_MARCA = "SELECT * FROM marca ORDER BY nombre";
-    private final String SQL_CONSULTAR_MARCA_UNO = "SELECT * FROM marca WHERE nombre=?";
+    private final String SQL_CONSULTAR_MARCA_UNO_NOMBRE = "SELECT * FROM marca WHERE nombre=?";
+    private final String SQL_CONSULTAR_MARCA_UNO_ID = "SELECT * FROM marca WHERE id=?";
     private final String SQL_CANTIDAD_MARCAS = "SELECT count(nombre) as cantidad FROM marca;";
 
 
@@ -140,7 +141,7 @@ public class MarcaDao extends ConexionMySQL{
         MarcaBean bean = null ;
 
         try{
-            ps = getConexion().prepareStatement(SQL_CONSULTAR_MARCA_UNO);
+            ps = getConexion().prepareStatement(SQL_CONSULTAR_MARCA_UNO_NOMBRE);
             ps.setString(1, nombre);
             rs = ps.executeQuery();
 
@@ -164,6 +165,32 @@ public class MarcaDao extends ConexionMySQL{
         return bean ;
     }
 
+    public MarcaBean queryOne(int id){
+        MarcaBean bean = null ;
 
+        try{
+            ps = getConexion().prepareStatement(SQL_CONSULTAR_MARCA_UNO_ID);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            if(rs.next())
+                bean = new MarcaBean( rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion") );
+
+        }catch (SQLException e) {
+            System.out.println("Error al consultar si la categoría existe :(");
+            System.out.println(e);
+        }finally {
+            try{
+                rs.close();
+                ps.close();
+            }catch (Exception e){
+                System.out.println("Error al cerrar las conexiones :(");
+                System.out.println(e);
+
+            }
+        }
+
+        return bean ;
+    }
 
 }

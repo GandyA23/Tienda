@@ -90,11 +90,10 @@ public class Marca {
         int flag;
         System.out.println("Añadir Marca");
         do {
-            System.out.println("Ingresar el nombre de la marca: ");
-            cin.cLine();
+            System.out.print("Ingresar el nombre de la marca: ");
             nombre = cin.cLine();
             if (c = !validacion.onlyLetters(nombre))
-                System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo");
+                System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo\n");
 
         } while (c);
         if (marcaDao.queryOne(nombre) != null) return 2;
@@ -104,7 +103,7 @@ public class Marca {
                 descripcion = cin.cLine();
 
                 if (c = validacion.haveCharNotAllowed(descripcion))
-                    System.out.println("Error: Hay caracteres no permitidos, intentelo de nuevo");
+                    System.out.println("Error: Hay caracteres no permitidos, intentelo de nuevo\n");
 
             } while (c);
         }
@@ -113,7 +112,7 @@ public class Marca {
         return flag;
     }
 
-    public int query() {
+    protected int query() {
         System.out.println("Consultar Marcas");
         MarcaBean[] marcaBeans = marcaDao.query();
 
@@ -135,11 +134,10 @@ public class Marca {
 
         do {
             System.out.print("Ingrese el nombre de la Marca que desea eliminar: ");
-            cin.cLine();
             nombre = cin.cLine();
 
             if (c = !validacion.onlyLetters(nombre))
-                System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo");
+                System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo\n");
 
         } while (c);
 
@@ -155,7 +153,6 @@ public class Marca {
                     "2.- No\n" +
                     "Ingrese una opción [1/2]: "
             );
-
 
             if (c = opc < 1 || opc > 2)
                 System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
@@ -178,7 +175,6 @@ public class Marca {
         System.out.println("Actualizar Categoría");
 
         System.out.print("Ingrese el nombre de la Categoría que desea actualizar: ");
-        cin.cLine();
         nombre = cin.cLine();
 
         marcaBean = marcaDao.queryOne(nombre);
@@ -199,11 +195,10 @@ public class Marca {
                 case 1:
                     do{
                         System.out.print("Ingrese el nombre de la categoría: ");
-                        cin.cLine();
                         nombre = cin.cLine();
 
                         if( c = !validacion.onlyLetters(nombre) )
-                            System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo");
+                            System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo\n");
 
                     }while (c);
 
@@ -213,11 +208,10 @@ public class Marca {
                 case 2:
                     do{
                         System.out.print("Ingrese la descripción de la categoría: ");
-                        cin.cLine();
                         descripcion = cin.cLine();
 
                         if( c = validacion.haveCharNotAllowed(descripcion) )
-                            System.out.println("Error: Hay caracteres no permitidos, intentelo de nuevo");
+                            System.out.println("Error: Hay caracteres no permitidos, intentelo de nuevo\n");
 
                     }while (c);
 
@@ -225,8 +219,8 @@ public class Marca {
                     break;
 
                 case 3:
-                    marcaDao.update(marcaBean);
-                    return 1 ;
+                    if( marcaDao.update(marcaBean) ) return 1 ;
+                    else return 0 ;
 
                 case 4:
                     return 0 ;
