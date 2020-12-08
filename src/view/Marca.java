@@ -23,6 +23,8 @@ public class Marca {
                     "5.- Salir\n" +
                     "Ingrese una opción [1/2/3/4/5]: ");
 
+            System.out.println("\n\n");
+
             switch (opc) {
                 case 1:
                     switch (add()){
@@ -81,6 +83,8 @@ public class Marca {
                     }
                     break;
             }
+
+            System.out.println("\n\n");
         } while (opc != 5);
     }
 
@@ -96,7 +100,11 @@ public class Marca {
                 System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo\n");
 
         } while (c);
+
+        System.out.println("\n\n");
+
         if (marcaDao.queryOne(nombre) != null) return 2;
+
         if (validacion.doYouWantRead("descripción")) {
             do {
                 System.out.print("Ingrese la descripción de la categoría: ");
@@ -107,6 +115,9 @@ public class Marca {
 
             } while (c);
         }
+
+        System.out.println("\n\n");
+
         marcaBean = new MarcaBean(nombre, descripcion);
         flag = marcaDao.add(marcaBean) ? 1 : 0;
         return flag;
@@ -123,6 +134,9 @@ public class Marca {
 
         for (MarcaBean c : marcaBeans)
             System.out.println("Id: " + c.getId() + " -- Nombre: " + c.getNombre() + " -- Descripción: " + validacion.nullMessage(c.getDescripcion()));
+
+        System.out.println("\n\n");
+
         return 1;
     }
 
@@ -154,6 +168,8 @@ public class Marca {
                     "Ingrese una opción [1/2]: "
             );
 
+            System.out.println("\n\n");
+
             if (c = opc < 1 || opc > 2)
                 System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
 
@@ -179,6 +195,8 @@ public class Marca {
 
         marcaBean = marcaDao.queryOne(nombre);
 
+        System.out.println("\n\n");
+
         if( marcaBean == null ) return 2 ;
 
         do{
@@ -190,6 +208,8 @@ public class Marca {
                     "3.- Guardar cambios\n" +
                     "4.- Cancelar\n" +
                     "Ingrese una opción [1/2/3/4]: ");
+
+            System.out.println("\n\n");
 
             switch (opc){
                 case 1:
@@ -228,6 +248,8 @@ public class Marca {
                 default:
                     System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
             }
+
+            System.out.println("\n\n");
         }while (true);
 
     }

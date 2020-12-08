@@ -28,6 +28,8 @@ public class Categoria {
                     "5.- Salir\n" +
                     "Ingrese una opción [1/2/3/4/5]: ");
 
+            System.out.println("\n\n");
+
             switch(opc){
                 case 1:
                     switch (add()){
@@ -88,7 +90,7 @@ public class Categoria {
                     }
                     break ;
             }
-
+            System.out.println("\n\n");
         }while(opc != 5);
 
     }
@@ -109,6 +111,7 @@ public class Categoria {
 
         }while (c);
 
+        System.out.println("\n\n");
 
         if(categoriaDao.queryOne(nombre) != null) return 2 ;
 
@@ -124,6 +127,8 @@ public class Categoria {
             }while (c);
 
         }
+
+        System.out.println("\n\n");
 
         categoriaBean = new CategoriaBean(nombre, descripcion);
 
@@ -162,6 +167,8 @@ public class Categoria {
 
         }while (c);
 
+        System.out.println("\n\n");
+
         categoriaBean = categoriaDao.queryOne(nombre);
 
         if( categoriaBean == null ) return 2 ;
@@ -179,6 +186,8 @@ public class Categoria {
                 System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
 
         }while (c);
+
+        System.out.println("\n\n");
 
         if( opc == 1 && categoriaDao.delete(categoriaBean.getId())) return 1 ;
 
@@ -201,11 +210,13 @@ public class Categoria {
 
         categoriaBean = categoriaDao.queryOne(nombre);
 
+        System.out.println("\n\n");
+
         if( categoriaBean == null ) return 2 ;
 
         do{
             opc = cin.cInt("Nombre: " + categoriaBean.getNombre() + "\n" +
-                    "Descripción: " + categoriaBean.getDescripcion() + "\n" +
+                    "Descripción: " + validacion.nullMessage(categoriaBean.getDescripcion()) + "\n" +
                     "¿Que desea actualizar?\n" +
                     "1.- Nombre\n" +
                     "2.- Descripción\n" +
@@ -241,15 +252,19 @@ public class Categoria {
                     break;
 
                 case 3:
+                    System.out.println("\n\n");
                     if( categoriaDao.update(categoriaBean) ) return 1 ;
                     else return 0 ;
 
                 case 4:
+                    System.out.println("\n\n");
                     return 0 ;
 
                 default:
                     System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
             }
+
+
         }while (true);
 
     }

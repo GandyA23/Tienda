@@ -30,6 +30,8 @@ public class Producto {
                     "5.- Salir\n" +
                     "Ingrese una opción [1/2/3/4/5]: ");
 
+            System.out.println("\n\n");
+
             switch (opc) {
                 case 1:
                     switch (add()) {
@@ -107,6 +109,8 @@ public class Producto {
                     break;
             }
 
+            System.out.println("\n\n");
+
         } while (opc != 5);
     }
 
@@ -136,6 +140,8 @@ public class Producto {
 
         }while (c);
 
+        System.out.println("\n\n");
+
         do{
             System.out.print("Ingrese el nombre del producto: ");
             nombre = cin.cLine();
@@ -144,6 +150,8 @@ public class Producto {
                 System.out.println("Error: Solo se admiten letras y espacios en el nombre, intentelo de nuevo\n");
 
         }while (c);
+
+        System.out.println("\n\n");
 
         do{
             printCategorias(categoriaBeans);
@@ -160,6 +168,8 @@ public class Producto {
             }
         }while (c);
 
+        System.out.println("\n\n");
+
         do{
             printMarcas(marcaBeans);
             System.out.print("Ingrese el nombre de la marca del Producto: ");
@@ -175,6 +185,8 @@ public class Producto {
             }
         }while (c);
 
+        System.out.println("\n\n");
+
         do{
             existencia = cin.cInt("Ingrese la existencia del producto: ");
 
@@ -183,6 +195,8 @@ public class Producto {
 
         }while (c);
 
+        System.out.println("\n\n");
+
         do{
             precio = cin.cDouble("Ingrese el precio del producto: ");
 
@@ -190,6 +204,8 @@ public class Producto {
                 System.out.println("Error: El precio debe de ser mayor a cero, intentelo de nuevo");
 
         }while (c);
+
+        System.out.println("\n\n");
 
         if(validacion.doYouWantRead("descripción")){
 
@@ -203,6 +219,8 @@ public class Producto {
             }while (c);
 
         }
+
+        System.out.println("\n\n");
 
         productoBean = new ProductoBean(codigo, nombre, categoriaBean, marcaBean, existencia, precio, descripcion);
         flag = productoDao.add(productoBean) ? 1 : 0 ;
@@ -251,6 +269,8 @@ public class Producto {
 
         }while (c);
 
+        System.out.println("\n\n");
+
         productoBean = productoDao.queryOne(codigo);
 
         if( productoBean == null ) return 2 ;
@@ -274,6 +294,8 @@ public class Producto {
 
             if( c = opc < 1 || opc > 2 )
                 System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
+
+            System.out.println("\n\n");
 
         }while (c);
 
@@ -323,6 +345,8 @@ public class Producto {
                     "7.- Guardar cambios\n" +
                     "8.- Cancelar\n" +
                     "Ingrese una opción [1/2/3/4/5/6/7/8]: ");
+
+            System.out.println("\n\n");
 
             switch (opc){
                 case 1:
@@ -424,6 +448,8 @@ public class Producto {
                 default:
                     System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
             }
+
+            System.out.println("\n\n");
         }while (true);
     }
 
