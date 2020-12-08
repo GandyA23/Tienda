@@ -11,13 +11,7 @@ public class Validacion {
         int opcF = 0;
 
         do{
-            try{
-                cin.init();
-                System.out.print("Este campo (" + campo + ") no es obligatorio, ¿Desea ingresarlo?\n1.-Si\n2.-No\nIngrese una opción: ");
-                opcF = cin.cInt();
-            }catch (Exception e){
-                System.out.println("Error: No ingrese caracteres, vuelva a intentarlo.");
-            }
+            opcF = cin.cInt("Este campo (" + campo + ") no es obligatorio, ¿Desea ingresarlo?\n1.-Si\n2.-No\nIngrese una opción: ");
 
             if(c = opcF < 1 || opcF > 2)
                 System.out.println("Error: Ingrese una opción valida, vuelva a intentarlo.");
