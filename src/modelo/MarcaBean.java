@@ -13,6 +13,10 @@ public class MarcaBean {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+    public MarcaBean(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 
     public MarcaBean(int id) {
         this.id = id;
