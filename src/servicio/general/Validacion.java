@@ -2,7 +2,7 @@ package servicio.general;
 
 public class Validacion {
 
-    private String ACENTOS = "áéíóúÁÉÍÓÚ";
+    private String ACENTOS = "áéíóúÁÉÍÓÚñÑ";
     private String ALLOWED_CHARACTERS = " .,:;\"\'()-";
     private final Cin cin = new Cin();
 
@@ -36,6 +36,17 @@ public class Validacion {
         }
 
         return false ;
+    }
+
+    public boolean onlyLettersWithoutSpaces(String str){
+        int n = str.length();
+        for(int i=0; i<n; i++){
+            char c = str.charAt(i);
+
+            if( !isLetter(c) ) return false ;
+        }
+
+        return true ;
     }
 
     public boolean onlyLetters(String str){
